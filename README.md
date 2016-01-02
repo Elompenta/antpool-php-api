@@ -53,6 +53,11 @@ Examples:
 
 $ant->get() return with a JSON decoded PHP array.  
 
+# Crontab
+Feel free to setup a sheduled check via Crontab
+    vim /etc/crontab
+    */10 *  * * *   root    php /<your-dir>/antpool-php-api/antpool.php
+
 # Pricacy
 - We will NEVER store your API-Secret or send it away within any API call
 - All API request are encrypted by TLS
