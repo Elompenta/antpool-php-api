@@ -1,7 +1,7 @@
 # antpool-php-api
 Free Antpool PHP-API-Client ready to use. (https://www.antpool.com/)
 
-# Setup
+# Initial Setup
 
 Get files from Github repository
 
@@ -15,6 +15,10 @@ Create you own config file and add antpool API access credentials
 
 Register you Public-API-Key on the current Proxy API. (see limitation - we work on a solution to solve this issue)\
 http://maaapi.mooo.com/info/
+
+# Update
+    $ cd antpool-php-api
+    $ git pull
 
 # How to use
 Execute the file "antpool.php".
