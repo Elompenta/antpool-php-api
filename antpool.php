@@ -30,3 +30,5 @@ if (file_exists('custom.php')) {
 } else {
 	require_once('custom.sample.php');
 }
+
+unset($ant);

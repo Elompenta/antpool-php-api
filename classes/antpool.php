@@ -21,7 +21,6 @@ class antpool {
 
 		// todo: check if given data is correct
 
-		// todo: check if curl exists
 		if (!function_exists('curl_exec')) {
 			exit("Error: Please install PHP curl extension to use this Software.\r\n $ apt-get install php5-curl\r\n");
 		}

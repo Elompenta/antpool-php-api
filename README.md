@@ -28,7 +28,30 @@ Execute the file "antpool.php".
 antpool.php will load all libaries and execute a file wich is named "custom.php" if it is available.\
 Feel free to create your own Codes in a filed called "custom.php". We does not overwrite them in the future.
 
-We deliver some example files, like default API lookups or email alerting if any worker does not has a hashrate and seems to be offline.
+We deliver some example files, like default API lookups or email alerting if any worker does not has a hashrate and seems to be offline.\
+Delivered Example Files:
+- custom.example.php
+    - Will show the output of all API methods
+- custom-alert-worker-down.sample.php
+    - Alert via Email / SMS if one worker has zero hashrate ans seems to be down
+
+# Create custom checks
+You are able to use all official antpool statements. Just call the API-Client with the statement that you want.\
+Official API Documentation: https://www.antpool.com/user/apiGuild.htm\
+
+Examples:
+- Pool Stats
+    - $ant->get('poolStats');
+- Account balance
+    - $ant->get('account'));
+- Hashrate
+    - $ant->get('hashrate'));
+- Workers Hashrate
+    - $ant->get('workers'));
+- Paymanet History
+    - $ant->get('paymentHistory'));
+
+$ant->get() return with a JSON decoded PHP array.  
 
 # Pricacy
 - We will NEVER store your API-Secret or send it away within any API call
