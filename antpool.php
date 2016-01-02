@@ -12,11 +12,11 @@
  **/
 
 // load classes
-require_once('classes/antpool.php');
+require_once(__DIR__.'/classes/antpool.php');
 
 // check if custom config file exist
-if (file_exists('config.php')) {
-	require_once('config.php');
+if (file_exists(__DIR__.'/config.php')) {
+	require_once(__DIR__.'/config.php');
 } else {
 	exit('please create your own config.php based on config.sample.php');
 }
@@ -25,10 +25,10 @@ if (file_exists('config.php')) {
 $ant = new antpool($username, $api_key, $api_secret);
 
 // check if custom.php exist and execute
-if (file_exists('custom.php')) {
-	require_once('custom.php');
+if (file_exists(__DIR__.'/custom.php')) {
+	require_once(__DIR__.'/custom.php');
 } else {
-	require_once('custom.sample.php');
+	require_once(__DIR__.'/custom.sample.php');
 }
 
 unset($ant);
