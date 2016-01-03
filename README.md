@@ -31,7 +31,7 @@ antpool.php will load all libaries and execute a file wich is named "custom.php"
 Feel free to create your own Codes in a filed called "custom.php". We does not overwrite them in the future.
 
 We deliver some example files, like default API lookups or email alerting if any worker does not has a hashrate and seems to be offline.\
-Delivered Example Files:
+## Delivered example scripts:
 - custom.example.php
     - Will show the output of all API methods
 - custom-alert-worker-down.sample.php
@@ -41,7 +41,7 @@ Delivered Example Files:
 
 # Create custom checks
 You are able to use all official antpool statements. Just call the API-Client with the statement that you want.\
-Official API Documentation: https://www.antpool.com/user/apiGuild.htm\
+Official API Documentation: https://www.antpool.com/user/apiGuild.htm
 
 Examples:
 - Pool Stats
