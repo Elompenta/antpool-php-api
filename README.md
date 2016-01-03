@@ -13,7 +13,7 @@ Create you own config file and add antpool API access credentials
     $ cp config.sample.php config.php
     $ vim config.php
 
-Register your Public-API-Key on the current Proxy API. (see limitations - we work on a solution to solve this issue)\
+Register your Public-API-Key on the current Proxy API. (see limitations - we work on a solution to solve this issue)  
 http://maaapi.mooo.com/info/
 
 *Special thanks to Matt's Alternative AntPool API to solve this issue for the moment*
@@ -27,10 +27,11 @@ Execute the file "antpool.php".
 
     php antpool.php
 
-antpool.php will load all libaries and execute a file wich is named "custom.php" if it is available.\
+antpool.php will load all libaries and execute a file wich is named "custom.php" if it is available.  
 Feel free to create your own Codes in a filed called "custom.php". We does not overwrite them in the future.
 
-We deliver some example files, like default API lookups or email alerting if any worker does not has a hashrate and seems to be offline.\
+We deliver some example files, like default API lookups or email alerting if any worker does not has a hashrate and seems to be offline.
+
 ## Delivered example scripts:
 - custom.example.php
     - Will show the output of all API methods
@@ -40,7 +41,7 @@ We deliver some example files, like default API lookups or email alerting if any
     - Alert via Email / SMS if your balance changed
 
 # Create custom checks
-You are able to use all official antpool statements. Just call the API-Client with the statement that you want.\
+You are able to use all official antpool statements. Just call the API-Client with the statement that you want.  
 Official API Documentation: https://www.antpool.com/user/apiGuild.htm
 
 Examples:
