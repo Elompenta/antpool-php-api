@@ -11,7 +11,15 @@
  * @license		GNU GENERAL PUBLIC LICENSE Version 2
  **/
 
-// antpool user settings
-$username = '';
-$api_key = '';
-$api_secret = '';
+class config {
+
+	// antpool user settings
+	public $username 	= '';
+	public $api_key 	= '';
+	public $api_secret 	= '';
+
+	// alerts
+	public  $email 		= '';
+	public  $mobile 	= '';
+
+}

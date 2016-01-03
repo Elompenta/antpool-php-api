@@ -22,7 +22,8 @@ if (file_exists(__DIR__.'/config.php')) {
 }
 
 // init antpool class
-$ant = new antpool($username, $api_key, $api_secret);
+$config = new config();
+$ant 	= new antpool($config->username, $config->api_key, $config->api_secret);
 
 // check if custom.php exist and execute
 if (file_exists(__DIR__.'/custom.php')) {
