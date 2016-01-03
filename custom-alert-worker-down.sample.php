@@ -11,10 +11,6 @@
  * @license		GNU GENERAL PUBLIC LICENSE Version 2
  **/
 
-// rename this file to custom.php and
-// do you own stuff in this file
-// we will never overrite this file
-
 // Example: alert down worker
 $workers = $ant->get('workers');
 foreach($workers->rows as $worker) {

@@ -35,7 +35,9 @@ Delivered Example Files:
 - custom.example.php
     - Will show the output of all API methods
 - custom-alert-worker-down.sample.php
-    - Alert via Email / SMS if one worker has zero hashrate ans seems to be down
+    - Alert via Email / SMS if a worker has zero hashrate ans seems to be down
+- custom-alert-balance-update.sample.php
+    - Alert via Email / SMS if your balance changed
 
 # Create custom checks
 You are able to use all official antpool statements. Just call the API-Client with the statement that you want.\
