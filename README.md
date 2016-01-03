@@ -13,7 +13,7 @@ Create you own config file and add antpool API access credentials
     $ cp config.sample.php config.php
     $ vim config.php
 
-Register you Public-API-Key on the current Proxy API. (see limitation - we work on a solution to solve this issue)\
+Register your Public-API-Key on the current Proxy API. (see limitation - we work on a solution to solve this issue)\
 http://maaapi.mooo.com/info/
 
 # Update
