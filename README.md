@@ -43,13 +43,13 @@ Examples:
 - Pool Stats
     - $ant->get('poolStats');
 - Account balance
-    - $ant->get('account'));
+    - $ant->get('account');
 - Hashrate
-    - $ant->get('hashrate')); 
+    - $ant->get('hashrate'); 
 - Workers Hashrate
-    - $ant->get('workers'));
+    - $ant->get('workers');
 - Paymanet History
-    - $ant->get('paymentHistory'));
+    - $ant->get('paymentHistory');
 
 $ant->get() return with a JSON decoded PHP array.  
 
