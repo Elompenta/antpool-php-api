@@ -45,7 +45,7 @@ Examples:
 - Account balance
     - $ant->get('account'));
 - Hashrate
-    - $ant->get('hashrate'));
+    - $ant->get('hashrate')); 
 - Workers Hashrate
     - $ant->get('workers'));
 - Paymanet History
