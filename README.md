@@ -32,6 +32,11 @@ Feel free to create your own Codes in a filed called "custom.php". We does not o
 
 We deliver some example files, like default API lookups or email alerting if any worker does not has a hashrate and seems to be offline.
 
+## Configure
+You can set the following configurations in your "custom.php"  
+
+    $ant->config('print_error_if_api_down', boolean); // default true
+
 ## Delivered example scripts:
 - custom.example.php
     - Will show the output of all API methods

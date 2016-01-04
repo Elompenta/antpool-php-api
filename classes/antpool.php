@@ -13,6 +13,9 @@
 
 class antpool {
 
+	// configurations
+	private $print_error_if_api_down = true;
+
 	// private methods
 	function __construct($username, $api_key, $api_secret) {
 		$this->username = $username;
@@ -65,7 +68,13 @@ class antpool {
 		curl_close($ch);
 
 		// check if curl was timed out
-		if ($result === false) exit('Error: No API connect');
+		if ($result === false) {
+			if ($this->print_error_if_api_down) {
+				exit('Error: No API connect');
+			} else {
+				exit();
+			}
+		}
 
 		// validate JSON
 		$result_json = json_decode($result);
@@ -77,5 +86,11 @@ class antpool {
 			exit('Error: No Data received - '.print_r($result_json, true));
 		}
 
+	}
+
+	function config($config, $value) {
+		if (isset($this->$config)) {
+			$this->$config = $value;
+		}
 	}
 }
