@@ -54,17 +54,27 @@ class antpool {
 		curl_setopt($ch, CURLOPT_URL, 'https://maaapi.mooo.com/api/'.$type.'.htm');
 		// todo: switch to public cert
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		// todo: switch to original API if ddos kiddies go away
 		#curl_setopt($ch, CURLOPT_URL, 'https://antpool.com/api/'.$type.'.htm');
 		curl_setopt($ch, CURLOPT_POST, count($post_fields));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$result = json_decode(curl_exec($ch));
+		// set large timeout because API lak sometimes
+		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+		$result = curl_exec($ch);
 		curl_close($ch);
 
-		if ($result->message == 'ok') {
-			return $result->data;
+		// check if curl was timed out
+		if ($result === false) exit('Error: No API connect');
+
+		// validate JSON
+		$result_json = json_decode($result);
+		if (json_last_error() != JSON_ERROR_NONE) exit('Error: read broken JSON from API - JSON Error: '.json_last_error());
+
+		if ($result_json->message == 'ok') {
+			return $result_json->data;
 		} else {
-			return 'error';
+			exit('Error: No Data received - '.print_r($result_json, true));
 		}
 
 	}

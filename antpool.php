@@ -12,6 +12,7 @@
  **/
 
 // load classes
+error_reporting(E_ALL);
 require_once(__DIR__.'/classes/antpool.php');
 
 // check if custom config file exist
