@@ -54,16 +54,15 @@ class antpool {
 
 
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, 'https://maaapi.mooo.com/api/'.$type.'.htm');
+		#curl_setopt($ch, CURLOPT_URL, 'https://maaapi.mooo.com/api/'.$type.'.htm');
+		curl_setopt($ch, CURLOPT_URL, 'https://antpool.com/api/'.$type.'.htm');
 		// todo: switch to public cert
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		// todo: switch to original API if ddos kiddies go away
-		#curl_setopt($ch, CURLOPT_URL, 'https://antpool.com/api/'.$type.'.htm');
 		curl_setopt($ch, CURLOPT_POST, count($post_fields));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		// set large timeout because API lak sometimes
-		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 		$result = curl_exec($ch);
 		curl_close($ch);
 
@@ -78,7 +77,7 @@ class antpool {
 
 		// validate JSON
 		$result_json = json_decode($result);
-		if (json_last_error() != JSON_ERROR_NONE) exit('Error: read broken JSON from API - JSON Error: '.json_last_error());
+		if (json_last_error() != JSON_ERROR_NONE) exit('Error: read broken JSON from API - JSON Error: '.json_last_error().' ('.$result.')');
 
 		if ($result_json->message == 'ok') {
 			return $result_json->data;
