@@ -13,11 +13,6 @@ Create you own config file and add antpool API access credentials
     $ cp config.sample.php config.php
     $ vim config.php
 
-Register your Public-API-Key on the current Proxy API. (see limitations - we work on a solution to solve this issue)  
-http://maaapi.mooo.com/info/
-
-*Special thanks to Matt's Alternative AntPool API to solve this issue for the moment*
-
 # Update
     $ cd antpool-php-api
     $ git pull
@@ -67,14 +62,11 @@ $ant->get() return with a JSON decoded PHP array.
 Feel free to setup a sheduled check via Crontab
 
     vim /etc/crontab
-    */10 *  * * *   root    php /<your-dir>/antpool-php-api/antpool.php
+    */10 *  * * *   root    php /<dir>/antpool-php-api/antpool.php
 
 # Pricacy
-- We will NEVER store your API-Secret or send it away within any API call
+- We will NEVER store your API-Secret or send it away within any communication
 - All API request are encrypted by TLS
 
 # Current Limitations (we work on it)
-At the moment antpool has some trouble with DDOS prevention and kill API requests.
-We proxy every API request over a other API at this moment.
-- API requests are limited to 20 Request per 10 Minute slots at the moment
-- Because Proxy-API you cannot use IP-Filter at the moment
+none
