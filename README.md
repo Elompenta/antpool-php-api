@@ -68,5 +68,5 @@ Feel free to setup a sheduled check via Crontab
 - We will NEVER store your API-Secret or send it away within any communication
 - All API request are encrypted by TLS
 
-# Current Limitations (we work on it)
+# Current Limitations
 none

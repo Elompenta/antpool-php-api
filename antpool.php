@@ -1,12 +1,12 @@
 <?php
 /*!
  * @author		Sebastian Lutz
- * @copyright 	Baebeca Solutions - Lutz
+ * @copyright	Baebeca Solutions - Lutz
  * @email		lutz@baebeca.de
  * @pgp			0x5AD0240C
  * @link		https://www.baebeca.de
  * @link-github	https://github.com/Elompenta/antpool-php-api
- * @customer 	-
+ * @customer	-
  * @project		antpool-php-api
  * @license		GNU GENERAL PUBLIC LICENSE Version 2
  **/
