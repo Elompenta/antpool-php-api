@@ -27,17 +27,17 @@ if (file_exists(__DIR__.'/tmp/balance.txt')) {
 		// todo: send balance diff instead new balance
 
 		// Send Email
-		mail($config->email, 'Balance updated: '.$account->balance, '');
+		mail($ant_config->email, 'Balance updated: '.$account->balance, '');
 
 		// Send SMS
 		// we use gammu cli GSM binary in this example
 		// if you need a cheap PHP-SMS-API to send SMS write us a email
-		exec("echo \"Balance updated: ".$account->balance."\" | sudo gammu-smsd-inject TEXT \"".$config->mobile."\"");
+		exec("echo \"Balance updated: ".$account->balance."\" | sudo gammu-smsd-inject TEXT \"".$ant_config->mobile."\"");
 	}
 } else {
 	if (!file_put_contents(__DIR__.'/tmp/balance.txt', $account->balance)) exit('Error: cant create file: '.__DIR__.'/tmp/balance.txt');
 	// Send Email
-	mail($config->email, 'Balance stored: '.$account->balance, '');
+	mail($ant_config->email, 'Balance stored: '.$account->balance, '');
 
 	// Send SMS
 	// we use gammu cli GSM binary in this example

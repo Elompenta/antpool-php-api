@@ -17,12 +17,12 @@ foreach($workers->rows as $worker) {
 	if ($worker->last10m == 0) {
 
 		// Send Email
-		mail($config->email, 'antpool worker down: '.$worker->worker, '');
+		mail($ant_config->email, 'antpool worker down: '.$worker->worker, '');
 
 		// Send SMS
 		// we use gammu cli GSM binary in this example
 		// if you need a cheap PHP-SMS-API to send SMS write us a email
-		exec("echo \"antpool worker down: ".$worker->worker."\" | sudo gammu-smsd-inject TEXT \"".$config->mobile."\"");
+		exec("echo \"antpool worker down: ".$worker->worker."\" | sudo gammu-smsd-inject TEXT \"".$ant_config->mobile."\"");
 
 	}
 }

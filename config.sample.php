@@ -11,7 +11,7 @@
  * @license		GNU GENERAL PUBLIC LICENSE Version 2
  **/
 
-class config {
+class ant_config {
 
 	// antpool user settings
 	public $username 	= '';

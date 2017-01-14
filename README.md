@@ -17,13 +17,29 @@ Create you own config file and add antpool API access credentials
     $ cd antpool-php-api
     $ git pull
 
+# Setup config.php
+Create config.php
+	
+	cp config.sample.php config.php
+
+Enter your API Access Details
+
+	// antpool user settings
+   	public $username 	= '';
+   	public $api_key 	= '';
+   	public $api_secret 	= '';
+   	   	
+We will never overwrite your config.php   	
+
 # How to use
 Execute the file "antpool.php".
 
     php antpool.php
 
-antpool.php will load all libaries and execute a file wich is named "custom.php" if it is available.  
-Feel free to create your own Codes in a filed called "custom.php". We does not overwrite them in the future.
+antpool.php will load configuration and needed libaries and execute a file wich is named "custom.php" if it is available.  
+Feel free to create your own Codes in your "custom.php".
+
+We does not overwrite the file "custom.php" in the future releases.
 
 We deliver some example files, like default API lookups or email alerting if any worker does not has a hashrate and seems to be offline.
 
@@ -56,7 +72,7 @@ Examples:
 - Paymanet History
     - $ant->get('paymentHistory');
 
-$ant->get() return with a JSON decoded PHP array.  
+$ant->get() return a JSON decoded PHP array.  
 
 # Crontab
 Feel free to setup a sheduled check via Crontab
