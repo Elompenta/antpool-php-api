@@ -18,13 +18,13 @@
 ?>
 <!-- API Examples -->
 <pre>
-	<? print_r($ant->get('poolStats')); ?>
+	<?php print_r($ant->get('poolStats')); ?>
 	</hr>
-	<? print_r($ant->get('account')); ?>
+	<?php print_r($ant->get('account')); ?>
 	</hr>
-	<? print_r($ant->get('hashrate')); ?>
+	<?php print_r($ant->get('hashrate')); ?>
 	</hr>
-	<? print_r($ant->get('workers')); ?>
+	<?php print_r($ant->get('workers')); ?>
 	</hr>
-	<? print_r($ant->get('paymentHistory')); ?>
+	<?php print_r($ant->get('paymentHistory')); ?>
 </pre>
