@@ -28,8 +28,8 @@ Enter your API Access Details
    	public $username 	= '';
    	public $api_key 	= '';
    	public $api_secret 	= '';
-   	   	
-We will never overwrite your config.php   	
+	
+_Username must be your Username, NOT your Account Email_   	   	
 
 # How to use
 Execute the file "antpool.php".
