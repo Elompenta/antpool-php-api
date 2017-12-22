@@ -86,3 +86,6 @@ Feel free to setup a sheduled check via Crontab
 
 # Current Limitations
 none
+
+# Forks
+- Laravel PHP Facade/Antpool for the Antpool API (https://github.com/aburakovskiy/laravel-antpool-api)
