@@ -64,15 +64,15 @@ Variable $currency can be: "BTC, LTC, ETH, ZEC" (default ist BTC)
 
 Examples:
 - Pool Stats
-    - $ant->get('poolStats', $currency = 'BTC);
+    - $ant->get('poolStats', $currency = 'BTC');
 - Account balance
-    - $ant->get('account', $currency = 'BTC);
+    - $ant->get('account', $currency = 'BTC');
 - Hashrate
     - $ant->get('hashrate'); 
 - Workers Hashrate
-    - $ant->get('workers', $currency = 'BTC);
+    - $ant->get('workers', $currency = 'BTC');
 - Paymanet History
-    - $ant->get('paymentHistory', $currency = 'BTC);
+    - $ant->get('paymentHistory', $currency = 'BTC');
 
 $ant->get() return a JSON decoded PHP array.  
 
