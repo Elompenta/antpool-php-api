@@ -24,6 +24,8 @@
  * 
  * @arg Argument description and usage info
  */
+$fiatSymbol = ""; // set your local currency symbol IE: $, €
+$cryptoAbr = ""; // Set your Crypto abbreviation here IE: BTC, LTC, ETH
 
 //Crypto prices, change variable according to your needs
 $coin='litecoin'; // bitcoin,litecoin,ethereum,zcash
@@ -107,17 +109,17 @@ $payments = $ant->get('paymentHistory');
     </tr>
   </thead>
   <tbody>
+     <tr>
+      <td><?php print $balance . " " . $cryptoAbr; ?></td>
+      <td><?php print $daily . " " . $cryptoAbr; ?></td>
+      <td><?php print $daily*7 . " " .  $cryptoAbr; ?></td>
+      <td><?php print $daily*30  . " " .  $cryptoAbr; ?></td>
+    </tr>>
     <tr>
-      <td><?php print "$balance LTC"; ?></td>
-      <td><?php print "$daily LTC"; ?></td>
-      <td><?php print $daily*7; print "LTC"; ?></td>
-      <td><?php print $daily*30; print "LTC"; ?></td>
-    </tr>
-    <tr>
-      <td><?php print "$";print round($balanceFiat,2); ?></td>
-      <td><?php print "$"; print round($daily*$fiatCurrency,2); ?></td>
-      <td><?php print "$"; print round(($daily*7)*$fiatCurrency,2); ?></td>
-      <td><?php print "$"; print round(($daily*30)*$fiatCurrency,2); ?></td>
+      <td><?php print $fiatSymbol; print round($balanceFiat,2); ?></td>
+      <td><?php print $fiatSymbol; print round($daily*$fiatCurrency,2); ?></td>
+      <td><?php print $fiatSymbol; print round(($daily*7)*$fiatCurrency,2); ?></td>
+      <td><?php print $fiatSymbol; print round(($daily*30)*$fiatCurrency,2); ?></td>
     </tr>
   </tbody>
 </table>
@@ -160,55 +162,55 @@ $payments = $ant->get('paymentHistory');
     </tr>
   </thead>
   <tbody>
-    <tr>
+        <tr>
       <td><?php print $payments->rows[0]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[0]->txId; ?></td>
-      <td><?php print $payments->rows[0]->amount; print " LTC"; ?></td>
+      <td><?php print $payments->rows[0]->amount . " " . $cryptoAbr; ?></td>
     </tr>
         <tr>
       <td><?php print $payments->rows[1]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[1]->txId; ?></td>
-      <td><?php print $payments->rows[1]->amount; print " LTC"; ?></td>
+      <td><?php print $payments->rows[1]->amount . " " . $cryptoAbr; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[2]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[2]->txId; ?></td>
-      <td><?php print $payments->rows[2]->amount; print " LTC"; ?></td>
+      <td><?php print $payments->rows[2]->amount . " " .  $cryptoAbr; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[3]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[3]->txId; ?></td>
-      <td><?php print $payments->rows[3]->amount; print " LTC"; ?></td>
+      <td><?php print $payments->rows[3]->amount . " " . $cryptoAbr; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[4]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[4]->txId; ?></td>
-      <td><?php print $payments->rows[4]->amount; print " LTC"; ?></td>
+      <td><?php print $payments->rows[4]->amount . " " . $cryptoAbr; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[5]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[5]->txId; ?></td>
-      <td><?php print $payments->rows[5]->amount; print " LTC"; ?></td>
+      <td><?php print $payments->rows[5]->amount . " " . $cryptoAbr; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[6]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[6]->txId; ?></td>
-      <td><?php print $payments->rows[6]->amount; print " LTC"; ?></td>
+      <td><?php print $payments->rows[6]->amount . " " . $cryptoAbr; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[7]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[7]->txId; ?></td>
-      <td><?php print $payments->rows[7]->amount; print " LTC"; ?></td>
+      <td><?php print $payments->rows[7]->amount . " " . $cryptoAbr; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[8]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[8]->txId; ?></td>
-      <td><?php print $payments->rows[8]->amount; print " LTC"; ?></td>
+      <td><?php print $payments->rows[8]->amount . " " . $cryptoAbr; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[9]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[9]->txId; ?></td>
-      <td><?php print $payments->rows[9]->amount; print " LTC"; ?></td>
+      <td><?php print $payments->rows[9]->amount . " " . $cryptoAbr; ?></td>
     </tr>
   </tbody>
 </table>
