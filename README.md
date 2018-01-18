@@ -60,17 +60,19 @@ You can set the following configurations in your "custom.php"
 You are able to use all official antpool statements. Just call the API-Client with the statement that you want.  
 Official API Documentation: https://www.antpool.com/user/apiGuild.htm
 
+Variable $currency can be: "BTC, LTC, ETH, ZEC" (default ist BTC)
+
 Examples:
 - Pool Stats
-    - $ant->get('poolStats');
+    - $ant->get('poolStats', $currency = 'BTC);
 - Account balance
-    - $ant->get('account');
+    - $ant->get('account', $currency = 'BTC);
 - Hashrate
     - $ant->get('hashrate'); 
 - Workers Hashrate
-    - $ant->get('workers');
+    - $ant->get('workers', $currency = 'BTC);
 - Paymanet History
-    - $ant->get('paymentHistory');
+    - $ant->get('paymentHistory', $currency = 'BTC);
 
 $ant->get() return a JSON decoded PHP array.  
 

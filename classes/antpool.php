@@ -33,7 +33,7 @@ class antpool {
 		unset($this->username, $this->api_key, $this->api_secret);
 	}
 
-	function get($type) {
+	function get($type, $currency = 'BTC') {
 		// generate api parameters
 		$nonce = time();
 		$hmac_message = $this->username.$this->api_key.$nonce;
@@ -43,7 +43,8 @@ class antpool {
 		$post_fields = array(
 			'key' => $this->api_key,
 			'nonce' => $nonce,
-			'signature' => $hmac
+			'signature' => $hmac,
+			'coin' => $currency
 		);
 
 		$post_data = '';
@@ -58,6 +59,7 @@ class antpool {
 		curl_setopt($ch, CURLOPT_URL, 'https://antpool.com/api/'.$type.'.htm');
 		// todo: switch to public cert
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
 		curl_setopt($ch, CURLOPT_POST, count($post_fields));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
