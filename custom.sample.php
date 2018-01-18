@@ -31,7 +31,7 @@ $price='USD'; //BTC,USD,EUR
 $link='https://api.coinmarketcap.com/v1/ticker/'.$coin.'?convert='.$price;
 $data=file_get_contents($link);
 $json=json_decode($data);
-$usd=$json[0]->price_usd;
+$fiatCurrency=$json[0]->price_usd; // change to meet your needs IE price_eur
 
 //Pool Stats
 $poolstats = $ant->get('poolStats');
@@ -50,7 +50,7 @@ $daily = $account->earn24Hours;
 $totalEarnings = $account->earnTotal;
 $paid = $account->paidOut;
 $balance = $account->balance;
-$balanceUSD = $usd*$balance;
+$balanceFiat = $fiatCurrency*$balance;
 
 //Hashrate info
 $hashrate = $ant->get('hashrate');
@@ -114,10 +114,10 @@ $payments = $ant->get('paymentHistory');
       <td><?php print $daily*30; print "LTC"; ?></td>
     </tr>
     <tr>
-      <td><?php print "$";print round($balanceUSD,2); ?></td>
-      <td><?php print "$"; print round($daily*$usd,2); ?></td>
-      <td><?php print "$"; print round(($daily*7)*$usd,2); ?></td>
-      <td><?php print "$"; print round(($daily*30)*$usd,2); ?></td>
+      <td><?php print "$";print round($balanceFiat,2); ?></td>
+      <td><?php print "$"; print round($daily*$fiatCurrency,2); ?></td>
+      <td><?php print "$"; print round(($daily*7)*$fiatCurrency,2); ?></td>
+      <td><?php print "$"; print round(($daily*30)*$fiatCurrency,2); ?></td>
     </tr>
   </tbody>
 </table>
@@ -154,7 +154,7 @@ $payments = $ant->get('paymentHistory');
     <th colspan="4"><center>Last 10 Payments</center></th>
     </tr>
     <tr>
-      <th scope="col">Time & Date</th>
+      <th scope="col">Time &amp Date</th>
       <th scope="col" colspan="2">Transaction ID</th>
      <th scope="col">amount</th>
     </tr>
