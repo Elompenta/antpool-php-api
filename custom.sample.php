@@ -14,30 +14,34 @@
 
 // rename this file to custom.php and
 // do you own stuff in this file
-// we will never overrite this file
+// we will never overrite this config.php
+
+
+$fiat_name = 'USD'; // USD,EUR
+$fiat_symbol = "$"; // set your local currency symbol IE: $, €
+
+$coin = 'BTC'; // Set your Crypto abbreviation here IE: BTC, LTC, ETH
+$coin_longname = 'bitcoin'; // bitcoin,litecoin,ethereum,zcash
 
 /**
  * API Request Caching
  *
- *  Use server-side caching to store API request's as JSON at a set 
+ *  Use server-side caching to store API request's as JSON at a set
  *  interval, rather than each pageload.
- * 
+ *
  * @arg Argument description and usage info
  */
 
-$fiatSymbol = "$"; // set your local currency symbol IE: $, €
-$cryptoAbr = "LTC"; // Set your Crypto abbreviation here IE: BTC, LTC, ETH
 
-//Crypto prices, change variable according to your needs
-$coin='litecoin'; // bitcoin,litecoin,ethereum,zcash
-$price='USD'; //BTC,USD,EUR
-$link='https://api.coinmarketcap.com/v1/ticker/'.$coin.'?convert='.$price;
+// get crypto prices from coinmarketcap.com
+$link='https://api.coinmarketcap.com/v1/ticker/'.$coin_longname.'?convert='.$fiat_name;
 $data=file_get_contents($link);
 $json=json_decode($data);
-$fiatCurrency=$json[0]->price_usd; //change according to your needs IE price_eur
+// todo: switch to better solution to use custom user currency from aboce config
+$fiat_currency=$json[0]->price_usd; //change according to your needs IE price_eur
 
 //Pool Stats
-$poolstats = $ant->get('poolStats');
+$poolstats = $ant->get('poolStats', $coin);
 
 $poolHash = $poolstats->poolHashrate;
 
@@ -46,28 +50,31 @@ $poolHash = $poolstats->poolHashrate;
 //print_r(' PH/s');
 //print_r('<br>');
 
+
 //Payment information
-$account = $ant->get('account');
+$account = $ant->get('account', $coin);
 
 $daily = $account->earn24Hours;
 $totalEarnings = $account->earnTotal;
 $paid = $account->paidOut;
 $balance = $account->balance;
-$balanceFiat = $fiatCurrency*$balance;
+$balanceFiat = $fiat_currency*$balance;
+
 
 //Hashrate info
-$hashrate = $ant->get('hashrate');
+$hashrate = $ant->get('hashrate', $coin);
 
 $last10m = $hashrate->last10m;
 $last30m = $hashrate->last30m;
 $last1h = $hashrate->last1h;
 $last1d = $hashrate->last1d;
 
+
 //Worker info
 //$workers = $ant->get('workers');
 
 //Payment information
-$payments = $ant->get('paymentHistory');
+$payments = $ant->get('paymentHistory', $coin);
 
 ?>
 <!-- API Examples -->
@@ -79,7 +86,7 @@ $payments = $ant->get('paymentHistory');
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css"> <!--Download from https://getbootstrap.com / same for boostrap.min.js-->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -93,10 +100,15 @@ $payments = $ant->get('paymentHistory');
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
+		<li class="nav-item">
+			<a class="nav-link" target="_blank" href="https://github.com/Elompenta/antpool-php-api">antpool-php-api documentation</a>
+		</li>
   </ul>
    </div>
   </nav>
-  <div class="table-responsive"> 
+  <div class="table-responsive">
+
+  <?php // todo: switch to divs instead html tables :-} ?>
   <table class="table table-dark table-striped">
   <thead>
   	<tr>
@@ -111,16 +123,16 @@ $payments = $ant->get('paymentHistory');
   </thead>
   <tbody>
      <tr>
-      <td><?php print $balance . " " . $cryptoAbr; ?></td>
-      <td><?php print $daily . " " . $cryptoAbr; ?></td>
-      <td><?php print $daily*7 . " " .  $cryptoAbr; ?></td>
-      <td><?php print $daily*30  . " " .  $cryptoAbr; ?></td>
+      <td><?php print $balance . " " . $coin; ?></td>
+      <td><?php print $daily . " " . $coin; ?></td>
+      <td><?php print $daily*7 . " " .  $coin; ?></td>
+      <td><?php print $daily*30  . " " .  $coin; ?></td>
     </tr>
     <tr>
-      <td><?php print $fiatSymbol; print round($balanceFiat,2); ?></td>
-      <td><?php print $fiatSymbol; print round($daily*$fiatCurrency,2); ?></td>
-      <td><?php print $fiatSymbol; print round(($daily*7)*$fiatCurrency,2); ?></td>
-      <td><?php print $fiatSymbol; print round(($daily*30)*$fiatCurrency,2); ?></td>
+      <td><?php print $fiat_symbol; print round($balanceFiat,2); ?></td>
+      <td><?php print $fiat_symbol; print round($daily*$fiat_currency,2); ?></td>
+      <td><?php print $fiat_symbol; print round(($daily*7)*$fiat_currency,2); ?></td>
+      <td><?php print $fiat_symbol; print round(($daily*30)*$fiat_currency,2); ?></td>
     </tr>
   </tbody>
 </table>
@@ -130,7 +142,7 @@ $payments = $ant->get('paymentHistory');
     <table class="table table-dark table-striped table-condensed">
   <thead>
   	<tr>
-    <th colspan="4"><center><?php print $cryptoAbr." "; ?>Hashrate</center></th>
+    <th colspan="4"><center><?php print $coin." "; ?>Hashrate</center></th>
     </tr>
     <tr>
       <th scope="col">Hashrate 10 mins</th>
@@ -154,7 +166,7 @@ $payments = $ant->get('paymentHistory');
     <table class="table table-dark table-striped">
   <thead>
   	<tr>
-    <th colspan="4"><center>Last 10 <?php print " " .$cryptoAbr." "; ?> Payments</center></th>
+    <th colspan="4"><center>Last 10 <?php print " " .$coin." "; ?> Payments</center></th>
     </tr>
     <tr>
       <th scope="col">Time &amp; Date</th>
@@ -166,59 +178,62 @@ $payments = $ant->get('paymentHistory');
     <tr>
       <td><?php print $payments->rows[0]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[0]->txId; ?></td>
-      <td><?php print $payments->rows[0]->amount . " " . $cryptoAbr; ?></td>
+      <td><?php print $payments->rows[0]->amount . " " . $coin; ?></td>
     </tr>
         <tr>
       <td><?php print $payments->rows[1]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[1]->txId; ?></td>
-      <td><?php print $payments->rows[1]->amount . " " . $cryptoAbr; ?></td>
+      <td><?php print $payments->rows[1]->amount . " " . $coin; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[2]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[2]->txId; ?></td>
-      <td><?php print $payments->rows[2]->amount . " " .  $cryptoAbr; ?></td>
+      <td><?php print $payments->rows[2]->amount . " " .  $coin; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[3]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[3]->txId; ?></td>
-      <td><?php print $payments->rows[3]->amount . " " . $cryptoAbr; ?></td>
+      <td><?php print $payments->rows[3]->amount . " " . $coin; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[4]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[4]->txId; ?></td>
-      <td><?php print $payments->rows[4]->amount . " " . $cryptoAbr; ?></td>
+      <td><?php print $payments->rows[4]->amount . " " . $coin; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[5]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[5]->txId; ?></td>
-      <td><?php print $payments->rows[5]->amount . " " . $cryptoAbr; ?></td>
+      <td><?php print $payments->rows[5]->amount . " " . $coin; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[6]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[6]->txId; ?></td>
-      <td><?php print $payments->rows[6]->amount . " " . $cryptoAbr; ?></td>
+      <td><?php print $payments->rows[6]->amount . " " . $coin; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[7]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[7]->txId; ?></td>
-      <td><?php print $payments->rows[7]->amount . " " . $cryptoAbr; ?></td>
+      <td><?php print $payments->rows[7]->amount . " " . $coin; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[8]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[8]->txId; ?></td>
-      <td><?php print $payments->rows[8]->amount . " " . $cryptoAbr; ?></td>
+      <td><?php print $payments->rows[8]->amount . " " . $coin; ?></td>
     </tr>
       <tr>
       <td><?php print $payments->rows[9]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[9]->txId; ?></td>
-      <td><?php print $payments->rows[9]->amount . " " . $cryptoAbr; ?></td>
+      <td><?php print $payments->rows[9]->amount . " " . $coin; ?></td>
     </tr>
   </tbody>
 </table>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <link href="js/jquery-3.2.1.slim.min.js"> <!-- download from https://code.jquery.com -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <link href="js/bootstrap.min.js"> 
+    <link href="./js/jquery.min.js">
+
+	<?php // todo: for which feature do you need popper.js? ?>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script> -->
+
+    <link href="js/bootstrap.min.js">
   </body>
 </html>
