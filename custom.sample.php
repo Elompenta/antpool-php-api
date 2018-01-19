@@ -24,8 +24,9 @@
  * 
  * @arg Argument description and usage info
  */
-$fiatSymbol = ""; // set your local currency symbol IE: $, €
-$cryptoAbr = ""; // Set your Crypto abbreviation here IE: BTC, LTC, ETH
+
+$fiatSymbol = "$"; // set your local currency symbol IE: $, €
+$cryptoAbr = "LTC"; // Set your Crypto abbreviation here IE: BTC, LTC, ETH
 
 //Crypto prices, change variable according to your needs
 $coin='litecoin'; // bitcoin,litecoin,ethereum,zcash
@@ -33,7 +34,7 @@ $price='USD'; //BTC,USD,EUR
 $link='https://api.coinmarketcap.com/v1/ticker/'.$coin.'?convert='.$price;
 $data=file_get_contents($link);
 $json=json_decode($data);
-$fiatCurrency=$json[0]->price_usd; // change to meet your needs IE price_eur
+$fiatCurrency=$json[0]->price_usd; //change according to your needs IE price_eur
 
 //Pool Stats
 $poolstats = $ant->get('poolStats');
@@ -72,13 +73,13 @@ $payments = $ant->get('paymentHistory');
 <!-- API Examples -->
 <html lang="en">
   <head>
-    <title>Our Mining Stats</title>
+    <title>Mining Stats</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css"> <!--Download from https://getbootstrap.com / same for boostrap.min.js-->
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -95,8 +96,8 @@ $payments = $ant->get('paymentHistory');
   </ul>
    </div>
   </nav>
-  
-  <table class="table table-dark">
+  <div class="table-responsive"> 
+  <table class="table table-dark table-striped">
   <thead>
   	<tr>
     <th colspan="4"><center>Account info</center></th>
@@ -114,7 +115,7 @@ $payments = $ant->get('paymentHistory');
       <td><?php print $daily . " " . $cryptoAbr; ?></td>
       <td><?php print $daily*7 . " " .  $cryptoAbr; ?></td>
       <td><?php print $daily*30  . " " .  $cryptoAbr; ?></td>
-    </tr>>
+    </tr>
     <tr>
       <td><?php print $fiatSymbol; print round($balanceFiat,2); ?></td>
       <td><?php print $fiatSymbol; print round($daily*$fiatCurrency,2); ?></td>
@@ -123,13 +124,13 @@ $payments = $ant->get('paymentHistory');
     </tr>
   </tbody>
 </table>
-  
+  </div>
   <br><hr><br>
-  
-    <table class="table table-dark">
+  <div class="table-responsive"> 
+    <table class="table table-dark table-striped table-condensed">
   <thead>
   	<tr>
-    <th colspan="4"><center>Hashrate</center></th>
+    <th colspan="4"><center><?php print $cryptoAbr." "; ?>Hashrate</center></th>
     </tr>
     <tr>
       <th scope="col">Hashrate 10 mins</th>
@@ -147,22 +148,22 @@ $payments = $ant->get('paymentHistory');
     </tr>
   </tbody>
 </table>
-  
+  </div>
     <br><hr><br>
-  
-    <table class="table table-dark">
+  <div class="table-responsive"> 
+    <table class="table table-dark table-striped">
   <thead>
   	<tr>
-    <th colspan="4"><center>Last 10 Payments</center></th>
+    <th colspan="4"><center>Last 10 <?php print " " .$cryptoAbr." "; ?> Payments</center></th>
     </tr>
     <tr>
-      <th scope="col">Time &amp Date</th>
+      <th scope="col">Time &amp; Date</th>
       <th scope="col" colspan="2">Transaction ID</th>
      <th scope="col">amount</th>
     </tr>
   </thead>
   <tbody>
-        <tr>
+    <tr>
       <td><?php print $payments->rows[0]->timestamp; ?></td>
       <td colspan="2"><?php print $payments->rows[0]->txId; ?></td>
       <td><?php print $payments->rows[0]->amount . " " . $cryptoAbr; ?></td>
@@ -216,8 +217,8 @@ $payments = $ant->get('paymentHistory');
 </table>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <link href="js/jquery-3.2.1.slim.min.js"> <!-- download from https://code.jquery.com -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <link href="js/bootstrap.min.js"> 
   </body>
 </html>
