@@ -211,6 +211,6 @@ $payments = $ant->get('paymentHistory', $coin);
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Bootstrap JS -->
     <link href="./js/jquery.min.js">
-    <link href="js/bootstrap.min.js">
+    <link href="./js/bootstrap.min.js">
   </body>
 </html>
