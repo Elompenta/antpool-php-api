@@ -106,134 +106,111 @@ $payments = $ant->get('paymentHistory', $coin);
   </ul>
    </div>
   </nav>
-  <div class="table-responsive">
-
-  <?php // todo: switch to divs instead html tables :-} ?>
-  <table class="table table-dark table-striped">
-  <thead>
-  	<tr>
-    <th colspan="4"><center>Account info</center></th>
-    </tr>
-    <tr>
-      <th scope="col">Balance</th>
-      <th scope="col">24 hour earnings</th>
-      <th scope="col">Est. Weekly Earnings</th>
-     <th scope="col">Est. Monthly Earnings</th>
-    </tr>
-  </thead>
-  <tbody>
-     <tr>
-      <td><?php print $balance . " " . $coin; ?></td>
-      <td><?php print $daily . " " . $coin; ?></td>
-      <td><?php print $daily*7 . " " .  $coin; ?></td>
-      <td><?php print $daily*30  . " " .  $coin; ?></td>
-    </tr>
-    <tr>
-      <td><?php print $fiat_symbol; print round($balanceFiat,2); ?></td>
-      <td><?php print $fiat_symbol; print round($daily*$fiat_currency,2); ?></td>
-      <td><?php print $fiat_symbol; print round(($daily*7)*$fiat_currency,2); ?></td>
-      <td><?php print $fiat_symbol; print round(($daily*30)*$fiat_currency,2); ?></td>
-    </tr>
-  </tbody>
-</table>
-  </div>
-  <br><hr><br>
-  <div class="table-responsive"> 
-    <table class="table table-dark table-striped table-condensed">
-  <thead>
-  	<tr>
-    <th colspan="4"><center><?php print $coin." "; ?>Hashrate</center></th>
-    </tr>
-    <tr>
-      <th scope="col">Hashrate 10 mins</th>
-      <th scope="col">Hashrate 30 mins</th>
-      <th scope="col">Hashrate 1 hour</th>
-     <th scope="col">Hashrate 1 day</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><?php print round(($last10m/1000),3); print " GH/s"; ?></td>
-      <td><?php print round(($last30m/1000),3); print " GH/s"; ?></td>
-      <td><?php print round(($last1h/1000),3); print " GH/s"; ?></td>
-      <td><?php print round(($last1d/1000),3); print " GH/s"; ?></td>
-    </tr>
-  </tbody>
-</table>
-  </div>
+ <div class="container"> 
+	<div class="row justify-content-md-center border border-dark rounded">
+    <div class="col-12 col-lg-12"><center>Account info</center></div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col">Balance</div>
+      <div class="col">24 hour earnings</div>
+      <div class="col">Est. Weekly Earnings</div>
+      <div class="col">Est. Monthly Earnings</div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col"><?php print $balance . " " . $cryptoAbr; ?></div>
+      <div class="col"><?php print $daily . " " . $cryptoAbr; ?></div>
+      <div class="col"><?php print $daily*7 . " " .  $cryptoAbr; ?></div>
+      <div class="col"><?php print $daily*30  . " " .  $cryptoAbr; ?></div>
+</div>   
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col"><?php print $fiatSymbol; print round($balanceFiat,2); ?></div>
+      <div class="col"><?php print $fiatSymbol; print round($daily*$fiatCurrency,2); ?></div>
+      <div class="col"><?php print $fiatSymbol; print round(($daily*7)*$fiatCurrency,2); ?></div>
+      <div class="col"><?php print $fiatSymbol; print round(($daily*30)*$fiatCurrency,2); ?></div>
+</div>
+</div>
+<br><hr><br>
+<div class="container"> 
+	<div class="row justify-content-md-center border border-dark rounded">
+    <div class="col-12 col-lg-12"><center><?php print $cryptoAbr." "; ?>Hashrate</center></div>
+</div>
+<div class="row align-items-start justify-content-md-center border border-dark rounded">
+      <div class="col">Hashrate 10 mins</div>
+      <div class="col">Hashrate 30 mins</div>
+	  <div class="col">Hashrate 1 hour</div>
+      <div class="col">Hashrate 1 day</div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col"><?php print round(($last10m/1000),3); print " GH/s"; ?></div>
+      <div class="col"><?php print round(($last30m/1000),3); print " GH/s"; ?></div>
+      <div class="col"><?php print round(($last1h/1000),3); print " GH/s"; ?></div>
+      <div class="col"><?php print round(($last1d/1000),3); print " GH/s"; ?></div>
+</div>
+</div>
     <br><hr><br>
-  <div class="table-responsive"> 
-    <table class="table table-dark table-striped">
-  <thead>
-  	<tr>
-    <th colspan="4"><center>Last 10 <?php print " " .$coin." "; ?> Payments</center></th>
-    </tr>
-    <tr>
-      <th scope="col">Time &amp; Date</th>
-      <th scope="col" colspan="2">Transaction ID</th>
-     <th scope="col">amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><?php print $payments->rows[0]->timestamp; ?></td>
-      <td colspan="2"><?php print $payments->rows[0]->txId; ?></td>
-      <td><?php print $payments->rows[0]->amount . " " . $coin; ?></td>
-    </tr>
-        <tr>
-      <td><?php print $payments->rows[1]->timestamp; ?></td>
-      <td colspan="2"><?php print $payments->rows[1]->txId; ?></td>
-      <td><?php print $payments->rows[1]->amount . " " . $coin; ?></td>
-    </tr>
-      <tr>
-      <td><?php print $payments->rows[2]->timestamp; ?></td>
-      <td colspan="2"><?php print $payments->rows[2]->txId; ?></td>
-      <td><?php print $payments->rows[2]->amount . " " .  $coin; ?></td>
-    </tr>
-      <tr>
-      <td><?php print $payments->rows[3]->timestamp; ?></td>
-      <td colspan="2"><?php print $payments->rows[3]->txId; ?></td>
-      <td><?php print $payments->rows[3]->amount . " " . $coin; ?></td>
-    </tr>
-      <tr>
-      <td><?php print $payments->rows[4]->timestamp; ?></td>
-      <td colspan="2"><?php print $payments->rows[4]->txId; ?></td>
-      <td><?php print $payments->rows[4]->amount . " " . $coin; ?></td>
-    </tr>
-      <tr>
-      <td><?php print $payments->rows[5]->timestamp; ?></td>
-      <td colspan="2"><?php print $payments->rows[5]->txId; ?></td>
-      <td><?php print $payments->rows[5]->amount . " " . $coin; ?></td>
-    </tr>
-      <tr>
-      <td><?php print $payments->rows[6]->timestamp; ?></td>
-      <td colspan="2"><?php print $payments->rows[6]->txId; ?></td>
-      <td><?php print $payments->rows[6]->amount . " " . $coin; ?></td>
-    </tr>
-      <tr>
-      <td><?php print $payments->rows[7]->timestamp; ?></td>
-      <td colspan="2"><?php print $payments->rows[7]->txId; ?></td>
-      <td><?php print $payments->rows[7]->amount . " " . $coin; ?></td>
-    </tr>
-      <tr>
-      <td><?php print $payments->rows[8]->timestamp; ?></td>
-      <td colspan="2"><?php print $payments->rows[8]->txId; ?></td>
-      <td><?php print $payments->rows[8]->amount . " " . $coin; ?></td>
-    </tr>
-      <tr>
-      <td><?php print $payments->rows[9]->timestamp; ?></td>
-      <td colspan="2"><?php print $payments->rows[9]->txId; ?></td>
-      <td><?php print $payments->rows[9]->amount . " " . $coin; ?></td>
-    </tr>
-  </tbody>
-</table>
+<div class="container"> 
+  	<div class="row justify-content-md-center border border-dark rounded">
+    <div class="col-md-auto"><center>Last 10 <?php print " " .$cryptoAbr." "; ?> Payments</center></div>
+</div>
+<div class="row border border-dark rounded">
+      <div class="col">Time &amp; Date</div>
+      <div class="col" >Transaction ID</div>
+     <div class="col">amount</div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col-md-auto"><?php print $payments->rows[0]->timestamp; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[0]->txId; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[0]->amount . " " . $cryptoAbr; ?></div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col-md-auto"><?php print $payments->rows[1]->timestamp; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[1]->txId; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[1]->amount . " " . $cryptoAbr; ?></div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col-md-auto"><?php print $payments->rows[2]->timestamp; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[2]->txId; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[2]->amount . " " .  $cryptoAbr; ?></div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col-md-auto"><?php print $payments->rows[3]->timestamp; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[3]->txId; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[3]->amount . " " . $cryptoAbr; ?></div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col-md-auto"><?php print $payments->rows[4]->timestamp; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[4]->txId; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[4]->amount . " " . $cryptoAbr; ?></div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col-md-auto"><?php print $payments->rows[5]->timestamp; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[5]->txId; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[5]->amount . " " . $cryptoAbr; ?></div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col-md-auto"><?php print $payments->rows[6]->timestamp; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[6]->txId; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[6]->amount . " " . $cryptoAbr; ?></div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col-md-auto"><?php print $payments->rows[7]->timestamp; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[7]->txId; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[7]->amount . " " . $cryptoAbr; ?></div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col-md-auto"><?php print $payments->rows[8]->timestamp; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[8]->txId; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[8]->amount . " " . $cryptoAbr; ?></div>
+</div>
+<div class="row justify-content-md-center border border-dark rounded">
+      <div class="col-md-auto"><?php print $payments->rows[9]->timestamp; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[9]->txId; ?></div>
+      <div class="col-md-auto"><?php print $payments->rows[9]->amount . " " . $cryptoAbr; ?></div>
+</div>
+</div>
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- jQuery first, then Bootstrap JS -->
     <link href="./js/jquery.min.js">
-
-	<?php // todo: for which feature do you need popper.js? ?>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script> -->
-
-    <link href="js/bootstrap.min.js">
+    <link href="./js/bootstrap.min.js">
   </body>
 </html>
