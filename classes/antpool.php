@@ -52,7 +52,7 @@ class antpool {
 		);
 
         if($this->hasPageSizeParameter($type))
-            array_push ( $post_fields, ['pageSize' => $page_size]);
+            array_merge( $post_fields, array('pageSize' => $page_size));
 
 		$post_data = '';
 		foreach($post_fields as $key => $value) {
