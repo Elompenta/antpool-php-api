@@ -33,7 +33,11 @@ class antpool {
 		unset($this->username, $this->api_key, $this->api_secret);
 	}
 
-	function get($type, $currency = 'BTC') {
+    function hasPageSizeParameter($type) {
+        return $type === 'workers' || $type === 'paymentHistory';
+    }
+
+	function get($type, $currency = 'BTC', $page_size = 10) {
 		// generate api parameters
 		$nonce = time();
 		$hmac_message = $this->username.$this->api_key.$nonce;
@@ -46,6 +50,9 @@ class antpool {
 			'signature' => $hmac,
 			'coin' => $currency
 		);
+
+        if($this->hasPageSizeParameter($type))
+            $post_fields = array_merge( $post_fields, array('pageSize' => $page_size));
 
 		$post_data = '';
 		foreach($post_fields as $key => $value) {

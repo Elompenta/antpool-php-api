@@ -27,4 +27,8 @@
 	<?php print_r($ant->get('workers')); ?>
 	</hr>
 	<?php print_r($ant->get('paymentHistory')); ?>
+    </hr>
+	<?php print_r($ant->get('workers', 'BTC', 100)); ?>
+    </hr>
+	<?php print_r($ant->get('paymentHistory', 'BTC', 100)); ?>
 </pre>
