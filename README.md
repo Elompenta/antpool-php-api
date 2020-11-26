@@ -1,3 +1,8 @@
+# Repo is no longer maintained
+This software is no longer maintained. You are welcome to have a look at the current Forks. There you will find nice colleagues who develop this software further.
+https://github.com/Elompenta/antpool-php-api/network/members
+
+
 # antpool-php-api
 Free Antpool PHP-API-Client ready to use. (https://www.antpool.com/)
 
